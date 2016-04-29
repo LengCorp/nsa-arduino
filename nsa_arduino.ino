@@ -348,54 +348,16 @@ void setup()
 // ************** void  loop ****************************************************
 void loop()
 {
-  //read voltage
- volt1=0;
- volt2=0;
- volt3=0;
- for (int i=0; i<10; i++){
-       volt1=volt1 + analogRead(1);
-       volt2=volt2 + analogRead(2);
-       volt3=volt3 + analogRead(3);
-       delay(10+i);}
- volt1=volt1/10; //medel värde på 10 samplingar
- volt1=volt1*5.00/1024; //spänning i volt
- volt2=volt2/10; //medel värde på 10 samplingar
- volt2=volt2*5.00/1024; //spänning i volt
- volt3=volt3/10; //medel värde på 10 samplingar
- volt3=volt3*5.00/1024; //spänning i volt
+
  
- garTemp1=(volt1-2.73)*100+5; //+5 kompenserar för mätfel pga långa kablar
- inneTemp2=(volt2-2.73)*100+5;
- uteTemp3=(volt3-2.73)*100;
- //output to LCD
- lcd.setCursor (0,0);
- lcd.print("Gar=");
- //lcd.print(volt1,2);
- //lcd.print(" / ");
- lcd.print(garTemp1,1);
- lcd.print(" Ute=");
- lcd.print(uteTemp3,1);
- lcd.setCursor (0,1);
- lcd.print("Inne=");
- //lcd.print(volt2,2);
- //lcd.print(" / ");
- lcd.print(inneTemp2,1);
+ garTemp1=200;
  
- //out to RS232 
+ 
+
   Serial.print(garTemp1*10,0);
-  Serial.print(" garaget   ");             //Skickar :
+  Serial.print(" garaget   ");             
   send433(garTemp1,01,0xBB);
-  delay(1000);
-  
-  Serial.print(inneTemp2*10,0);
-  Serial.print(" inne   ");
-  send433(inneTemp2,02,0xBC);
-  delay(1000);
-  
-  Serial.print(uteTemp3*10,0);
-  Serial.print(" ute   ");
-  send433(uteTemp3,03,0xBD);
-  delay(1000);
+
   
   delay(5000);
 }
