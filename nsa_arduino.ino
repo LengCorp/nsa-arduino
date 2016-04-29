@@ -307,7 +307,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("\n[Oregon V2.1 encoder]");
  
-  SEND_LOW();  
+  SEND_LOW();
  
 
   // Create the Oregon message for a temperature only sensor (TNHN132N)
@@ -326,50 +326,45 @@ void setup()
 // ************** void  loop ****************************************************
 void loop()
 {
-
- 
- garTemp1=200;
- 
- 
-
-  Serial.print(garTemp1*10,0);
-  Serial.print(" garaget   ");             
-  send433(garTemp1,01,0xBB);
-
+  garTemp1=2;
   
-  delay(5000);
+  for (int i = 0; i < 20; i++){
+    
+    send433(garTemp1 + i,01,0xBB);
+    delay(4000);
+  }     
 }
 
-
-
+ 
  //---------------- Send data to Telldus ----------------------------
- void send433(float temperature, byte humidity, byte Identitet)
- {
-  // Get Temperature, humidity and battery level from sensors
-  // (ie: 1wire DS18B20 for température, ...)
+void send433(float temperature, byte humidity, byte Identitet)
+{
+
   setId(OregonMessageBuffer, Identitet); //BB=187
   setBatteryLevel(OregonMessageBuffer, 0); // 0 : low, 1 : high
-  setTemperature(OregonMessageBuffer, temperature); //org  setTemperature(OregonMessageBuffer, 55.5);
- 
- 
+  setTemperature(OregonMessageBuffer, temperature);
+   
+   
   // Calculate the checksum
   calculateAndSetChecksum(OregonMessageBuffer);
- 
+   
   // Show the Oregon Message
-  for (byte i = 0; i < sizeof(OregonMessageBuffer); ++i)   {     Serial.print(OregonMessageBuffer[i] >> 4, HEX);
+  for (byte i = 0; i < sizeof(OregonMessageBuffer); ++i)   {     
+    Serial.print(OregonMessageBuffer[i] >> 4, HEX);
     Serial.print(OregonMessageBuffer[i] & 0x0F, HEX);
   }
     Serial.println();
   // Send the Message over RF
   sendOregon(OregonMessageBuffer, sizeof(OregonMessageBuffer));
+  
   // Send a "pause"
   SEND_LOW();
   delayMicroseconds(TWOTIME*8);
   // Send a copie of the first message. The v2.1 protocol send the
   // message two time 
   sendOregon(OregonMessageBuffer, sizeof(OregonMessageBuffer));
- 
+   
   SEND_LOW();
   
- }
+}
  // ---------- End send data till Telldus ---------
