@@ -28,7 +28,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
  
-//#define THN132N  //enbart termometer, ingen humidity
+
  
 const byte TX_PIN = 2;
  
@@ -38,12 +38,8 @@ const unsigned long TWOTIME = TIME*2;
 #define SEND_HIGH() digitalWrite(TX_PIN, HIGH)
 #define SEND_LOW() digitalWrite(TX_PIN, LOW)
  
-// Buffer for Oregon message
-#ifdef THN132N
-  byte OregonMessageBuffer[8];
-#else
-  byte OregonMessageBuffer[9];
-#endif
+byte OregonMessageBuffer[8];
+
  
 /**
  * \brief    Send logical "0" over RF
@@ -153,12 +149,9 @@ inline void sendPreamble(void)
  */
 inline void sendPostamble(void)
 {
-#ifdef THN132N
+
   sendQuarterLSB(0x00);
-#else
-  byte POSTAMBLE[]={0x00};
-  sendData(POSTAMBLE, 1);  
-#endif
+
 }
  
 /**
@@ -288,13 +281,11 @@ int Sum(byte count, const byte* data)
  */
 void calculateAndSetChecksum(byte* data)
 {
-#ifdef THN132N
-    int s = ((Sum(6, data) + (data[6]&0xF) - 0xa) & 0xff);
- 
-    data[6] |=  (s&0x0F) << 4;     data[7] =  (s&0xF0) >> 4;
-#else
-    data[8] = ((Sum(8, data) - 0xa) & 0xFF);
-#endif
+
+  int s = ((Sum(6, data) + (data[6]&0xF) - 0xa) & 0xff);
+   
+  data[6] |=  (s&0x0F) << 4;     data[7] =  (s&0xF0) >> 4;
+
 }
  
 /***************** End send 433 *************************************************/
@@ -323,24 +314,16 @@ void setup()
  
   SEND_LOW();  
  
-#ifdef THN132N  
+
   // Create the Oregon message for a temperature only sensor (TNHN132N)
   byte ID[] = {0xEA,0x4C};
-#else
-  // Create the Oregon message for a temperature/humidity sensor (THGR2228N)
-  byte ID[] = {0x1A,0x2D};
-#endif  
+
  
   setType(OregonMessageBuffer, ID);
   setChannel(OregonMessageBuffer, 0x20);
   //setId(OregonMessageBuffer, 0xBB); //BB=187
   // ------ End setup send433 -----------------
   // ------ setup POJ -------------------------
-  lcd.begin(16,2);
-  lcd.print("Templog 140125");
-  delay(1000);
-  lcd.clear();
-    // -------End setup POJ ---------------------
   
 }
 //-------------  end void setup -------------------------------------------------
@@ -373,10 +356,6 @@ void loop()
   setBatteryLevel(OregonMessageBuffer, 0); // 0 : low, 1 : high
   setTemperature(OregonMessageBuffer, temperature); //org  setTemperature(OregonMessageBuffer, 55.5);
  
-#ifndef THN132N
-  // Set Humidity
-  setHumidity(OregonMessageBuffer, humidity);
-#endif  
  
   // Calculate the checksum
   calculateAndSetChecksum(OregonMessageBuffer);
