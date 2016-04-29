@@ -292,15 +292,10 @@ void calculateAndSetChecksum(byte* data)
 /******************************************************************/
 /******************************************************************/
 //------- start POJ --------------
-#include <LiquidCrystal.h>
-LiquidCrystal lcd(8,9,4,5,6,7);
 
-float volt1=0;
-float volt2=0;
-float volt3=0;
+
 float garTemp1=0;
-float inneTemp2=0;
-float uteTemp3=0;
+
 int i=0;
 // ---------- End POJ ---------------
 
