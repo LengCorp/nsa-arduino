@@ -252,7 +252,7 @@ void calculateAndSetChecksum(byte* data)
 }
  
  
-void send433(float temperature, byte humidity, byte Identitet)
+void send433(float temperature, byte Identitet)
 {
 
   setId(OregonMessageBuffer, Identitet); //BB=187

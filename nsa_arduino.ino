@@ -41,14 +41,16 @@ void setup()
 // ************** void  loop ****************************************************
 void loop()
 { 
-  if (alarm_trigered()){
-    send433(TRIGGER_TEMP);
+  nsa_arduino();
+}
+
+
+void nsa_arduino(){
+  if (alarm_triggered()){
+    send433(TRIGGER_TEMP, 0xBB);
   } else {
-    send433(IS_ON_TEMP);
+    send433(IS_ON_TEMP, 0xBB);
   }
   
   delay(4000);
 }
-
-
-
