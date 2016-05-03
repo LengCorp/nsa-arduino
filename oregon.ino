@@ -1,4 +1,6 @@
 
+const unsigned long TIME = 512;
+const unsigned long TWOTIME = TIME*2;
 
 /**
  * \brief    Send logical "0" over RF
