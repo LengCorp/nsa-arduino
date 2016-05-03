@@ -1,3 +1,5 @@
+
+
 /**
  * \brief    Send logical "0" over RF
  * \details  azero bit be represented by an off-to-on transition
@@ -196,17 +198,6 @@ void setTemperature(byte *data, float temp)
 }
  
 /**
- * \brief    Set the sensor humidity
- * \param    data       Oregon message
- * \param    hum        the humidity
- */
-void setHumidity(byte* data, byte hum)
-{
-    data[7] = (hum/10);
-    data[6] |= (hum - data[7]*10) << 4;
-}
- 
-/**
  * \brief    Sum data for checksum
  * \param    count      number of bit to sum
  * \param    data       Oregon message
@@ -239,6 +230,7 @@ void calculateAndSetChecksum(byte* data)
   data[6] |=  (s&0x0F) << 4;     data[7] =  (s&0xF0) >> 4;
 
 }
+ 
  
  
 void send433(float temperature, byte Identitet)
