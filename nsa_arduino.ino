@@ -1,15 +1,10 @@
 /*
  * nsa_arduino
  */
- 
+
 byte OregonMessageBuffer[8];
 
 const byte TX_PIN = 2;
-const unsigned long TIME = 512;
-const unsigned long TWOTIME = TIME*2;
- 
-#define SEND_HIGH() digitalWrite(TX_PIN, HIGH)
-#define SEND_LOW() digitalWrite(TX_PIN, LOW)
 
 const float TRIGGER_TEMP = -27;
 const float IS_ON_TEMP = 90;
@@ -23,10 +18,10 @@ void setup()
   Serial.begin(9600);
   Serial.println("\n[Oregon V2.1 encoder]");
  
-  SEND_LOW();
+  // Make sure it starts at the low frequency 
+  digitalWrite(TX_PIN, LOW);
  
-
-  // Create the Oregon message for a temperature only sensor (TNHN132N)
+  // Create the Oregon message fo<<<<<<<<<r a temperature only sensor (TNHN132N)
   byte ID[] = {0xEA,0x4C};
 
  

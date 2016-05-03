@@ -1,4 +1,7 @@
 
+#define SEND_HIGH() digitalWrite(TX_PIN, HIGH)
+#define SEND_LOW() digitalWrite(TX_PIN, LOW)
+
 const unsigned long TIME = 512;
 const unsigned long TWOTIME = TIME*2;
 
