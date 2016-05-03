@@ -1,9 +1,3 @@
-
- 
-
- 
-
- 
 /**
  * \brief    Send logical "0" over RF
  * \details  azero bit be represented by an off-to-on transition
@@ -35,12 +29,7 @@ inline void sendOne(void)
    SEND_LOW();
    delayMicroseconds(TIME);
 }
- 
-/**
-* Send a bits quarter (4 bits = MSB from 8 bits value) over RF
-*
-* @param data Source data to process and sent
-*/
+
  
 /**
  * \brief    Send a bits quarter (4 bits = MSB from 8 bits value) over RF
