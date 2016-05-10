@@ -3,7 +3,7 @@ static int wasTriggered = 0;
 static int alarmPin;
 
 
-int start(const int pin){
+void alarm_start(const int pin){
   // set interrupt och alarmPin till pin
 }
 
@@ -13,7 +13,7 @@ int alarm_triggered()
 }
 
 
-int alarm_reset(){
+void alarm_reset(){
   wasTriggered = 0;
 }
 
