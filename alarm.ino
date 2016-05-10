@@ -1,15 +1,19 @@
 
-static int is_triggered = 0;
+static int wasTriggered = 0;
+static int alarmPin;
+
+
+int start(const int pin){
+  // set interrupt och alarmPin till pin
+}
 
 int alarm_triggered()
 {
-   if(is_triggered){
-     is_triggered = 0;
-     return 1;
-   } else {
-     is_triggered = 1;
-     return 0;
-   }
+  return wasTriggered;
 }
 
+
+int alarm_reset(){
+  wasTriggered = 0;
+}
 
