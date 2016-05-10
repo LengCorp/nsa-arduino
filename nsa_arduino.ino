@@ -30,24 +30,13 @@ void setup()
  
   setType(OregonMessageBuffer, ID);
   setChannel(OregonMessageBuffer, 0x20);
-  //setId(OregonMessageBuffer, 0xBB); //BB=187
-  // ------ End setup send433 -----------------
-  // ------ setup POJ -------------------------
+
   alarm_start()
 }
 
 // ************** void  loop ****************************************************
 void loop()
 { 
-  nsa_arduino();
-}
-
-
-/**
- * 
- */
-void nsa_arduino(){
-  
   if (alarm_triggered()){
     alarm_reset();
     send433(TRIGGER_TEMP, 0xBB);
