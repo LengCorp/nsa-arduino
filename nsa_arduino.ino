@@ -5,10 +5,13 @@
 byte OregonMessageBuffer[8];
 
 const byte TX_PIN = 2;
+const byte ALARM_PIN = 3;
 
 const float TRIGGER_TEMP = -27;
 const float IS_ON_TEMP = 90;
 const float BROKEN_TEMP = 60;
+
+
 
 void setup()
 {
@@ -30,7 +33,7 @@ void setup()
   //setId(OregonMessageBuffer, 0xBB); //BB=187
   // ------ End setup send433 -----------------
   // ------ setup POJ -------------------------
-  
+  alarm_start()
 }
 
 // ************** void  loop ****************************************************
@@ -40,8 +43,13 @@ void loop()
 }
 
 
+/**
+ * 
+ */
 void nsa_arduino(){
+  
   if (alarm_triggered()){
+    alarm_reset();
     send433(TRIGGER_TEMP, 0xBB);
   } else {
     send433(IS_ON_TEMP, 0xBB);
