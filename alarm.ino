@@ -3,7 +3,7 @@ static int wasTriggered = 0;
 
 void alarm_start(const int pin){
   // set interrupt och alarmPin till pin
-    attachInterrupt(digitalPinToInterrupt(pin), alarm_interrupt, FALLING);
+    attachInterrupt(digitalPinToInterrupt(pin), alarm_interrupt, RISING);
   
 }
 
