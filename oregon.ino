@@ -1,9 +1,40 @@
 
-#define SEND_HIGH() digitalWrite(TX_PIN, HIGH)
-#define SEND_LOW() digitalWrite(TX_PIN, LOW)
+/**
+ * Oregon:
+ *
+ *  * Use oregon_init(int pin) to initialize the pin for the transmitter.
+ *
+ *  * Use oregon_send433(float temperature, byte Identitet) to send as temperature with identity
+ *    using the oregon protocol.
+ */
+
+
+unsigned int sendDin;
+
+
+#define SEND_HIGH() digitalWrite(sendPin, HIGH)
+#define SEND_LOW() digitalWrite(sendPin, LOW)
+
 
 const unsigned long TIME = 512;
 const unsigned long TWOTIME = TIME*2;
+
+void oregon_init(int pin){
+  sendPin = pin;
+  
+  //---  Setup send433 ---------
+  pinMode(sendPin, OUTPUT);
+  
+    // Make sure it starts at the low frequency 
+  digitalWrite(sendPin, LOW);
+ 
+  // Create the Oregon message fo<<<<<<<<<r a temperature only sensor (TNHN132N)
+  byte ID[] = {0xEA,0x4C};
+
+ 
+  setType(OregonMessageBuffer, ID);
+  setChannel(OregonMessageBuffer, 0x20);
+}
 
 /**
  * \brief    Send logical "0" over RF
@@ -238,7 +269,7 @@ void calculateAndSetChecksum(byte* data)
  
  
  
-void send433(float temperature, byte Identitet)
+void oregon_send433(float temperature, byte Identitet)
 {
 
   setId(OregonMessageBuffer, Identitet); //BB=187
