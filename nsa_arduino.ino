@@ -9,8 +9,6 @@ const byte ALARM_PIN = 3;
 
 const float TRIGGER_TEMP = -27;
 const float IS_ON_TEMP = 90;
-const float BROKEN_TEMP = 60;
-
 
 void setup()
 {
