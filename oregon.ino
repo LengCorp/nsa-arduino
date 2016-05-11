@@ -19,7 +19,8 @@ unsigned int sendPin;
 const unsigned long TIME = 512;
 const unsigned long TWOTIME = TIME*2;
 
-void oregon_init(int pin){
+void oregon_init(int pin)
+{
   sendPin = pin;
   
   //---  Setup send433 ---------
