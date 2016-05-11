@@ -8,5 +8,4 @@ Telldus Tellstick Duo.
 
 ## How it works
 * When the unit is on, and working properly, it will send the temperature 90, using the oregon protocol.
-* When the alarm is triggered, it will send the temperature 30.
-* When the alarmsensor is broken, it will send the temperature 60.
+* When the alarm is triggered, it will send the temperature -27.
