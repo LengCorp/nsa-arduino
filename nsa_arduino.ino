@@ -31,7 +31,7 @@ void setup()
   setType(OregonMessageBuffer, ID);
   setChannel(OregonMessageBuffer, 0x20);
 
-  alarm_start()
+  alarm_start(ALARM_PIN);
 }
 
 // ************** void  loop ****************************************************
