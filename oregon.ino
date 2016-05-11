@@ -9,7 +9,7 @@
  */
 
 
-unsigned int sendDin;
+unsigned int sendPin;
 
 
 #define SEND_HIGH() digitalWrite(sendPin, HIGH)
