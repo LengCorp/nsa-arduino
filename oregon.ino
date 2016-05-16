@@ -291,10 +291,10 @@ void calculateAndSetChecksum(byte* data)
  
  
  
-void oregon_send433(float temperature, byte Identitet)
+void oregon_send433(float temperature, byte ID)
 {
 
-  setId(OregonMessageBuffer, Identitet); //BB=187
+  setId(OregonMessageBuffer, ID); //BB=187
   setBatteryLevel(OregonMessageBuffer, 0); // 0 : low, 1 : high
   setTemperature(OregonMessageBuffer, temperature);
    
